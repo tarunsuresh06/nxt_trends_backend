@@ -50,7 +50,7 @@ const authenticateUser = (req, res, next) => {
     }
 }
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     const { username, password, name } = req.body;
     const insertRegisterDataQuery = `
     INSERT INTO user_details
@@ -58,6 +58,8 @@ app.post('/register', (req, res) => {
     VALUES
     (${name}, ${username}, ${password});
     `;
+
+    await db.run(insertRegisterDataQuery);
 
 
 })
